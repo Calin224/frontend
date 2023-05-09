@@ -16,6 +16,7 @@ import "react-toastify/dist/ReactToastify.css";
 export default function Product({product, products}) {
     const [selectedSize, setSelectedSize] = useState([]);
     const [showError, setShowError] = useState(false);
+    const [selectedColor, setSelectedColor] = useState([]);
     const p = product?.data?.[0]?.attributes;
 
     const dispatch = useDispatch();
@@ -44,7 +45,7 @@ export default function Product({product, products}) {
             progress: undefined,
             theme: "dark",
         });
-    }
+    };
 
     return (
         <div className="w-full md:py-20">
@@ -69,7 +70,7 @@ export default function Product({product, products}) {
                             {p.original_price && (
                                 <>
                                     <p className="text-base  font-medium line-through">
-                                        &#8377;{p.original_price}
+                                        &#x24;{p.original_price}
                                     </p>
                                     <p className="ml-auto text-base font-medium text-green-500">
                                         {getDiscountedPricePercentage(p.original_price, p.price)}%
@@ -112,6 +113,73 @@ export default function Product({product, products}) {
                                     </div>
                                 ))}
                             </div>
+                            {p.color !== null && (
+                                <div className="mt-5">
+                                    <div className="flex justify-between mb-2">
+                                        <div className="text-md font-semibold">Select color</div>
+                                    </div>
+
+                                    {p.color != null && (
+                                        <div className="flex gap-3">
+                                            {p.color.data.map((item, i) => (
+                                                <div key={i}>
+                                                    {item.color === "red" && (
+                                                        <div
+                                                            className={`w-6 h-6 rounded-full bg-red-500 hover:border-2 hover:border-red-800 transition-all ${
+                                                                item.enabled
+                                                                    ? "hover:border-black cursor-pointer"
+                                                                    : "cursor-not-allowed bg-black/[0.1] opacity-50"
+                                                            }${
+                                                                selectedColor === item.color
+                                                                    ? " border-2 border-black"
+                                                                    : ""
+                                                            }`}
+                                                            onClick={() => {
+                                                                setSelectedColor(item.color);
+                                                                setShowError(false);
+                                                            }}
+                                                        ></div>
+                                                    )}
+                                                    {item.color === "blue" && (
+                                                        <div
+                                                            className={`w-6 h-6 rounded-full bg-blue-500 hover:border-2 hover:border-blue-800 transition-all ${
+                                                                item.enabled
+                                                                    ? "hover:border-black cursor-pointer"
+                                                                    : "cursor-not-allowed bg-black/[0.1] opacity-50"
+                                                            }${
+                                                                selectedColor === item.color
+                                                                    ? " border-2 border-black"
+                                                                    : ""
+                                                            }`}
+                                                            onClick={() => {
+                                                                setSelectedColor(item.color);
+                                                                setShowError(false);
+                                                            }}
+                                                        ></div>
+                                                    )}
+                                                    {item.color === "green" && (
+                                                        <div
+                                                            className={`w-6 h-6 rounded-full bg-green-500 hover:border-2 hover:border-green-800 transition-all ${
+                                                                item.enabled
+                                                                    ? "hover:border-black cursor-pointer"
+                                                                    : "cursor-not-allowed bg-black/[0.1] opacity-50"
+                                                            }${
+                                                                selectedColor === item.color
+                                                                    ? " border-2 border-black"
+                                                                    : ""
+                                                            }`}
+                                                            onClick={() => {
+                                                                setSelectedColor(item.color);
+                                                                setShowError(false);
+                                                            }}
+                                                        ></div>
+                                                    )}
+                                                </div>
+                                            ))}
+                                        </div>
+                                    )}
+                                </div>
+                            )}
 
                             {showError && (
                                 <div className="text-red-600 mt-1">

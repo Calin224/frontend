@@ -67,6 +67,27 @@ export default function CartItem({data}) {
                             })}
                         </select>
                     </div>
+                    {p.color !== null && (
+                        <div className="flex items-center gap-1">
+                            <div className="font-semibold">Color:</div>
+                            <select
+                                className="hover:text-black"
+                                onChange={(e) => updateCartItem(e, "selectedColor")}
+                            >
+                                {p.color.data.map((item, i) => {
+                                    return (
+                                        <option
+                                            key={i}
+                                            value={item}
+                                            disabled={!item.enabled ? true : false}
+                                            selected={data.selectedColor === item.color}
+                                        >{item.color}</option>
+                                    )
+                                })}
+                            </select>
+                        </div>
+                    )}
+
 
                     <div className="flex items-center gap-1">
                         <div className="font-semibold">Quantity:</div>
@@ -92,7 +113,7 @@ export default function CartItem({data}) {
                     </div>
                     <RiDeleteBin6Line
                         onClick={() =>
-                            dispatch(removeFromCart({ id: data.id }))
+                            dispatch(removeFromCart({id: data.id}))
                         }
                         className="cursor-pointer text-black/[0.5] hover:text-black text-[16px] md:text-[20px]"
                     />

@@ -1,4 +1,5 @@
 import sendgrid from "@sendgrid/mail";
+import {redirect} from "next/navigation";
 
 sendgrid.setApiKey(process.env.SENDGRID_API_KEY);
 
@@ -47,6 +48,7 @@ async function sendEmail(req, res) {
       </body>
       </html>`,
     });
+
   } catch (error) {
     // console.log(error);
     return res.status(error.statusCode || 500).json({ error: error.message });

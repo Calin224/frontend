@@ -10,6 +10,9 @@ import { BiMenuAltRight } from "react-icons/bi";
 import { VscChromeClose } from "react-icons/vsc";
 import { fetchDataFromApi } from "@/utils/api";
 import { useSelector } from "react-redux";
+import LoginBtn from './LoginBtn';
+
+import { useSession } from 'next-auth/react';
 
 export default function Header() {
   const [mobileMenu, setMobileMenu] = useState(false);
@@ -119,6 +122,12 @@ export default function Header() {
             )}
           </div>
           {/* Mobile icon end */}
+
+
+          <div>
+            <LoginBtn />
+          </div>
+
         </div>
       </Wrapper>
     </header>

@@ -1,15 +1,40 @@
-import NextAuth from 'next-auth'
-import Providers from 'next-auth/providers'
+import NextAuth from 'next-auth';
+import GoogleProvider from 'next-auth/providers/google';
+import DiscordProvider from 'next-auth/providers/discord';
 
-const options = {
+export const authOptions = {
+    // Configure one or more authentication providers
     providers: [
-        Providers.Google({
+        GoogleProvider({
             clientId: process.env.GOOGLE_CLIENT_ID,
             clientSecret: process.env.GOOGLE_CLIENT_SECRET,
         }),
-        // add other authentication providers here
+        DiscordProvider({
+            clientId: process.env.DISCORD_CLIENT_ID,
+            clientSecret: process.env.DISCORD_CLIENT_SECRET,
+        }),
     ],
-    // add other options here
-}
+    callbacks: {
+        async jwt({ token, account }) {
+            // Persist the OAuth access_token to the token right after signin
+            if (account) {
+                token.accessToken = account.access_token;
+            }
+            return token;
+        },
+        async session({ session, token, user }) {
+            // Send properties to the client, like an access_token from a provider.
+            session.accessToken = token.accessToken;
+            return session;
+        },
+        async signIn({ account, profile }) {
+            if (account.provider === "google") {
+                return profile.email_verified && profile.email.endsWith("@gmail.com")
+            }
+            return true // Do different verification for other providers that don't have `email_verified`
+        },
+    },
+};
 
-export default (req, res) => NextAuth(req, res, options)
+export default NextAuth(authOptions);
+

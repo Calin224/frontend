@@ -8,9 +8,10 @@ import {useState} from "react";
 import ReactMarkdown from "react-markdown";
 import {useSelector, useDispatch} from "react-redux";
 import {addToCart} from "@/store/cartSlice";
+import {addToWish} from "@/store/wishListSlice";
 
 import {ToastContainer, toast} from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Product({product, products}) {
     const [selectedSize, setSelectedSize] = useState([]);
@@ -30,13 +31,24 @@ export default function Product({product, products}) {
             progress: undefined,
             theme: "dark",
         });
+    };
+
+    const wish = () => {
+        toast.success("Success. Check your wish list!", {
+            position: "bottom-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+        });
     }
-
-
 
     return (
         <div className="w-full md:py-20">
-            <ToastContainer />
+            <ToastContainer/>
             <Wrapper>
                 <div className="flex flex-col lg:flex-row md:px-10 gap-[50px] lg:gap-[100px]">
                     <div className="w-full md:w-auto flex-[1.5] max-w-[500px] lg:max-w-full mx-auto lg:mx-0">
@@ -48,9 +60,7 @@ export default function Product({product, products}) {
                             {p.name}
                         </div>
 
-                        <div className="text-lg font-semibold mb-5">
-                            {p.subtitle}
-                        </div>
+                        <div className="text-lg font-semibold mb-5">{p.subtitle}</div>
 
                         <div className="flex items-center">
                             <p className="mr-2 text-lg font-semibold">
@@ -62,11 +72,8 @@ export default function Product({product, products}) {
                                         &#8377;{p.original_price}
                                     </p>
                                     <p className="ml-auto text-base font-medium text-green-500">
-                                        {getDiscountedPricePercentage(
-                                            p.original_price,
-                                            p.price
-                                        )}
-                                        % off
+                                        {getDiscountedPricePercentage(p.original_price, p.price)}%
+                                        off
                                     </p>
                                 </>
                             )}
@@ -87,14 +94,18 @@ export default function Product({product, products}) {
                                     Select Guide
                                 </div>
                             </div>
-                            <div id='sizesGrid' className="grid grid-cols-3 gap-2">
+                            <div id="sizesGrid" className="grid grid-cols-3 gap-2">
                                 {p.size.data.map((item, i) => (
                                     <div
                                         key={i}
-                                        className={`border rounded-md text-center py-3 font-medium ${item.enabled ? 'hover:border-black cursor-pointer' : 'cursor-not-allowed bg-black/[0.1] opacity-50'}${selectedSize === item.size ? ' border-black' : ''}`}
+                                        className={`border rounded-md text-center py-3 font-medium ${
+                                            item.enabled
+                                                ? "hover:border-black cursor-pointer"
+                                                : "cursor-not-allowed bg-black/[0.1] opacity-50"
+                                        }${selectedSize === item.size ? " border-black" : ""}`}
                                         onClick={() => {
-                                            setSelectedSize(item.size)
-                                            setShowError(false)
+                                            setSelectedSize(item.size);
+                                            setShowError(false);
                                         }}
                                     >
                                         {item.size}
@@ -107,7 +118,6 @@ export default function Product({product, products}) {
                                     Size selection is required
                                 </div>
                             )}
-
                         </div>
 
                         <button
@@ -115,12 +125,10 @@ export default function Product({product, products}) {
                             onClick={() => {
                                 if (!selectedSize) {
                                     setShowError(true);
-                                    document
-                                        .getElementById("sizesGrid")
-                                        .scrollIntoView({
-                                            block: "center",
-                                            behavior: "smooth",
-                                        });
+                                    document.getElementById("sizesGrid").scrollIntoView({
+                                        block: "center",
+                                        behavior: "smooth",
+                                    });
                                 } else {
                                     dispatch(
                                         addToCart({
@@ -137,20 +145,24 @@ export default function Product({product, products}) {
                         </button>
 
                         <button
-                            className="w-full py-4 rounded-full border border-black text-lg font-medium transition-transform active:scale-95 flex items-center justify-center gap-2 hover:opacity-75 mb-10">
-                            Whishlist
+                            className="w-full py-4 rounded-full border border-black text-lg font-medium transition-transform active:scale-95 flex items-center justify-center gap-2 hover:opacity-75 mb-10"
+                            onClick={() => {
+                                dispatch(
+                                    addToWish({
+                                        ...product?.data?.[0],
+                                    })
+                                );
+                                wish();
+                            }}
+                        >
+                            Add to Wishlist
                             <IoMdHeartEmpty size={20}/>
                         </button>
 
-
                         <div>
-                            <div className={'text-lg font-bold mb-5'}>
-                                Product Details
-                            </div>
+                            <div className={"text-lg font-bold mb-5"}>Product Details</div>
                             <div className="markdown text-md mb-5">
-                                <ReactMarkdown>
-                                    {p.description}
-                                </ReactMarkdown>
+                                <ReactMarkdown>{p.description}</ReactMarkdown>
                             </div>
                         </div>
                     </div>

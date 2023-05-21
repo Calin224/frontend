@@ -10,9 +10,8 @@ import { BiMenuAltRight } from "react-icons/bi";
 import { VscChromeClose } from "react-icons/vsc";
 import { fetchDataFromApi } from "@/utils/api";
 import { useSelector } from "react-redux";
-import LoginBtn from './LoginBtn';
-
 import { useSession } from 'next-auth/react';
+import LoginBtn from './LoginBtn';
 
 export default function Header() {
   const [mobileMenu, setMobileMenu] = useState(false);
@@ -52,6 +51,15 @@ export default function Header() {
     const { data } = await fetchDataFromApi("/api/categories?populate=*");
     setCategories(data);
   };
+
+  const { data: session, status: sessionStatus } = useSession(); // Get the session data and status
+
+  if (sessionStatus === 'loading') {
+    // Session is being fetched, show a loading state
+    return <p>Loading...</p>;
+  }
+
+  const isLoggedIn = session && session.user; // Check if the user is logged in
 
   return (
     <header
@@ -95,16 +103,18 @@ export default function Header() {
           {/* Icon end */}
 
           {/* Icon start */}
-          <Link href="/cart">
-            <div className="w-8 md:w-12 h-8 md:h-12 rounded-full flex justify-center items-center hover:bg-black/[0.05] cursor-pointer relative">
-              <BsCart className="text-[15px] md:text-[20px]" />
-              {cartItems.length > 0 && (
-                <div className="h-[14px] md:h-[18px] min-w-[14px] md:min-w-[18px] rounded-full bg-red-600 absolute top-1 left-5 md:left-7 text-white text-[10px] md:text-[12px] flex justify-center items-center px-[2px] md:px-[5px]">
-                  {cartItems.length}
-                </div>
-              )}
-            </div>
-          </Link>
+          {isLoggedIn && (
+            <Link href="/cart">
+              <div className="w-8 md:w-12 h-8 md:h-12 rounded-full flex justify-center items-center hover:bg-black/[0.05] cursor-pointer relative">
+                <BsCart className="text-[15px] md:text-[20px]" />
+                {cartItems.length > 0 && (
+                  <div className="h-[14px] md:h-[18px] min-w-[14px] md:min-w-[18px] rounded-full bg-red-600 absolute top-1 left-5 md:left-7 text-white text-[10px] md:text-[12px] flex justify-center items-center px-[2px] md:px-[5px]">
+                    {cartItems.length}
+                  </div>
+                )}
+              </div>
+            </Link>
+          )}
           {/* Icon end */}
 
           {/* Mobile icon start */}
@@ -122,7 +132,6 @@ export default function Header() {
             )}
           </div>
           {/* Mobile icon end */}
-
 
           <div>
             <LoginBtn />

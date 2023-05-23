@@ -60,7 +60,7 @@ export default function Contact() {
 
     return (
         <>
-            <div>
+            <div className="h-[70vh] flex justify-center flex-col items-center">
                 <h1 className={"text-center text-5xl py-7"}>Contact Form</h1>
                 <div className={"flex justify-center"}>
                     <form

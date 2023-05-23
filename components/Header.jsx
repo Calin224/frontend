@@ -63,11 +63,11 @@ export default function Header() {
 
   return (
     <header
-      className={`w-full h-[50px] md:h[80px] bg-white flex items-center justify-between z-20 sticky top-0 transition-transform duration-300 ${show}`}
+      className={`w-full h-[100px] md:h[80px] bg-white flex items-center justify-between z-20 sticky top-0 transition-transform duration-300 ${show}`}
     >
       <Wrapper className="h-[60px] flex justify-between items-center">
         <Link href="/">
-          <img src="/logo.svg" alt="" className="w-[40px] md:w-[60px]" />
+          <img src="/AquaCart.svg" alt="" className="w-[90px]" />
         </Link>
 
         <Menu
@@ -133,9 +133,7 @@ export default function Header() {
           </div>
           {/* Mobile icon end */}
 
-          <div>
-            <LoginBtn />
-          </div>
+          
 
         </div>
       </Wrapper>

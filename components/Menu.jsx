@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { BsChevronDown } from "react-icons/bs";
+import LoginBtn from "./LoginBtn";
 
 const data = [
   { id: 1, name: "Home", url: "/" },
@@ -54,6 +55,9 @@ export default function Menu({ showCatMenu, setShowCatMenu, categories }) {
           </React.Fragment>
         );
       })}
+      <div>
+            <LoginBtn />
+          </div>
     </ul>
   );
 }

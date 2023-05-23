@@ -48,7 +48,7 @@ export default function Home({ products, productsA, productsD, productsNaA, prod
                         </div>
                     </div>
                 ) : (
-                    <div>
+                    <div className="mb-12">
                         <div className="mb-14 space-x-6 flex">
                             <label htmlFor="sort">Sort by Price:</label>
                             <select id="sort" onChange={handleChange}>

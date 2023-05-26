@@ -4,14 +4,15 @@ import { getDiscountedPricePercentage } from "@/utils/helper";
 
 export default function ProductCard({data: {attributes: p, id}}) {
     return (
-        <div className="flex">
+        <div className="flex max-h-[500px] min-h-[500px] p-2">
             <Link href={`/product/${p.slug}`}
                 className="transform overflow-hidden bg-white duration-200 cursor-pointer">
                 <Image
-                    width={500}
-                    height={500}
+                    width={400}
+                    height={400}
                     src={p.thumbnail.data.attributes.url}
                     alt={p.name}
+                    className="min-h-[35px] max-h-[350px] object-cover "
                 />
 
                 <div className="p-4 text-black/[0.9]">

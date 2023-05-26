@@ -17,7 +17,7 @@ const subMenuData = [
     { id: 4, name: "Football shoes", doc_count: 107 },
 ];
 
-export default function Menu({ showCatMenu, setShowCatMenu, setMobileMenu }) {
+export default function MobileMenu({ showCatMenu, setShowCatMenu, setMobileMenu, categories }) {
     return (
         <ul className="flex flex-col md:hidden font-bold absolute top-[50px] left-0 w-full h-[calc(100vh-50px)] bg-white border-t text-black">
             {data.map((item) => {
@@ -35,24 +35,31 @@ export default function Menu({ showCatMenu, setShowCatMenu, setMobileMenu }) {
 
                                 {showCatMenu && (
                                     <ul className="bg-black/[0.05] -mx-5 mt-4 -mb-4">
-                                        {subMenuData.map((submenu) => {
-                                            return (
-                                                <Link
-                                                    key={submenu.id}
-                                                    href="/"
-                                                    onClick={() => {
-                                                        setShowCatMenu(false);
-                                                        setMobileMenu(false);
-                                                    }}
-                                                >
-                                                    <li className="py-4 px-8 border-t flex justify-between">
-                                                        <span className="opacity-50 text-sm">
-                                                            14
-                                                        </span>
-                                                    </li>
-                                                </Link>
-                                            );
-                                        })}
+                                        {categories?.map(
+                                            ({ attributes: c, id }) => {
+                                                return (
+                                                    <Link
+                                                        key={id}
+                                                        href={`/category/${c.slug}`}
+                                                        onClick={() => {
+                                                            setShowCatMenu(
+                                                                false
+                                                            );
+                                                            setMobileMenu(
+                                                                false
+                                                            );
+                                                        }}
+                                                    >
+                                                        <li className="py-4 px-8 border-t flex justify-between">
+                                                            {c.name}
+                                                            <span className="opacity-50 text-sm">
+                                                                {`(${c.products.data.length})`}
+                                                            </span>
+                                                        </li>
+                                                    </Link>
+                                                );
+                                            }
+                                        )}
                                     </ul>
                                 )}
                             </li>

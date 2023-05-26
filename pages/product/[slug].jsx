@@ -53,17 +53,7 @@ export default function Product({ product, products }) {
             <Wrapper>
                 <div className="flex flex-col lg:flex-row md:px-10 gap-[50px] lg:gap-[100px]">
                     <div className="w-full md:w-auto flex-[1.5] max-w-[500px] lg:max-w-full mx-auto lg:mx-0">
-                        {product.image ? (
-                            <ProductDetailsCarousel images={p.image.data} />
-                        ) : (
-                            <div className="w-full h-[500px] bg-gray-200 rounded-xl shadow-xl">
-                                <div className="w-full h-full flex items-center justify-center">
-                                    <div className="text-2xl font-semibold">
-                                        No image
-                                    </div>
-                                </div>
-                            </div>
-                        )}
+                        <ProductDetailsCarousel images={p.image.data} />
                     </div>
 
                     <div className="flex-[1] py-3">
@@ -196,6 +186,50 @@ export default function Product({ product, products }) {
                                                     {item.color === "green" && (
                                                         <div
                                                             className={`w-6 h-6 rounded-full bg-green-500 hover:border-2 hover:border-green-800 transition-all ${
+                                                                item.enabled
+                                                                    ? "hover:border-black cursor-pointer"
+                                                                    : "cursor-not-allowed bg-black/[0.1] opacity-50"
+                                                            }${
+                                                                selectedColor ===
+                                                                item.color
+                                                                    ? " border-2 border-black"
+                                                                    : ""
+                                                            }`}
+                                                            onClick={() => {
+                                                                setSelectedColor(
+                                                                    item.color
+                                                                );
+                                                                setShowError(
+                                                                    false
+                                                                );
+                                                            }}
+                                                        ></div>
+                                                    )}
+                                                    {item.color === "yellow" && (
+                                                        <div
+                                                            className={`w-6 h-6 rounded-full bg-yellow-500 hover:border-2 hover:border-yellow-800 transition-all ${
+                                                                item.enabled
+                                                                    ? "hover:border-black cursor-pointer"
+                                                                    : "cursor-not-allowed bg-black/[0.1] opacity-50"
+                                                            }${
+                                                                selectedColor ===
+                                                                item.color
+                                                                    ? " border-2 border-black"
+                                                                    : ""
+                                                            }`}
+                                                            onClick={() => {
+                                                                setSelectedColor(
+                                                                    item.color
+                                                                );
+                                                                setShowError(
+                                                                    false
+                                                                );
+                                                            }}
+                                                        ></div>
+                                                    )}
+                                                    {item.color === "purple" && (
+                                                        <div
+                                                            className={`w-6 h-6 rounded-full bg-purple-500 hover:border-2 hover:border-purple-800 transition-all ${
                                                                 item.enabled
                                                                     ? "hover:border-black cursor-pointer"
                                                                     : "cursor-not-allowed bg-black/[0.1] opacity-50"

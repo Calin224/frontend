@@ -49,40 +49,45 @@ export default function Home({ products, productsA, productsD, productsNaA, prod
                     </div>
                 ) : (
                     <div className="mb-12">
-                        <div className="mb-14 space-x-6 flex">
-                            <label htmlFor="sort">Sort by Price:</label>
-                            <select id="sort" onChange={handleChange}>
-                                <option value="">None</option>
-                                <option
-                                    value="asc"
+                        <div className="mb-14 flex flex-wrap items-center md:space-x-3">
+                            <div className="mb-4 md:mb-0 space-x-2">
+                                <label htmlFor="sort">Sort by Price:</label>
+                                <select id="sort" onChange={handleChange} className="bg-black/[0.1] py-3 px-2 rounded-lg">
+                                    <option value="">None</option>
+                                    <option
+                                        value="asc"
                                     // onChange={handleChange}
-                                >
-                                    Price (Low to High)
-                                </option>
-                                <option
-                                    value="desc"
+                                    >
+                                        Price (Low to High)
+                                    </option>
+                                    <option
+                                        value="desc"
                                     // onChange={handleChange}
-                                >
-                                    Price (High to Low)
-                                </option>
-                            </select>
-                            <div>|</div>
-                            <label htmlFor="s_name">Sort by name:</label>
-                            <select id="s_name" onChange={handleChange}>
-                                <option value="">None</option>
-                                <option
-                                    value="nasc"
+                                    >
+                                        Price (High to Low)
+                                    </option>
+                                </select>
+                            </div>
+
+                            <div className="space-x-2">
+                                <label htmlFor="s_name">Sort by name:</label>
+                                <select id="s_name" onChange={handleChange} className="bg-black/[0.1] py-3 px-2 rounded-lg">
+                                    <option value="">None</option>
+                                    <option
+                                        value="nasc"
                                     // onChange={handleChange}
-                                >
-                                    Ascending
-                                </option>
-                                <option
-                                    value="ndesc"
+                                    >
+                                        Ascending
+                                    </option>
+                                    <option
+                                        value="ndesc"
                                     // onChange={handleChange}
-                                >
-                                    Descending
-                                </option>
-                            </select>
+                                    >
+                                        Descending
+                                    </option>
+                                </select>
+                            </div>
+
                         </div>
                         {sortBy === "" ? (
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -102,7 +107,7 @@ export default function Home({ products, productsA, productsD, productsNaA, prod
                                     />
                                 ))}
                             </div>
-                        ): sortBy === "nasc" ? (
+                        ) : sortBy === "nasc" ? (
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                                 {productsNaA?.data?.map((productF) => (
                                     <ProductCard

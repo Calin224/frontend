@@ -9,8 +9,8 @@ import Footer from "@/components/Footer";
 export default function App({Component, pageProps}) {
     return (<>
         <Head>
-            <title>Nike</title>
-            <meta name="description" content="Generated buy create next app"/>
+            <title>Box Water</title>
+            <meta name="description" content="Box Water"/>
             <meta name="viewport" content="width=device-width, initial-scale=1"/>
             <link rel="icon" href="/favicon.ico"/>
             <link rel="preconnect" href="https://fonts.googleapis.com"/>

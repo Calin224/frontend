@@ -20,11 +20,13 @@ Bine ați venit la AquaCart, locul unde putem face o schimbare în modul în car
 
 Aici sunt câteva resurse utile pentru dezvoltarea proiectului AquaCart:
 
-*** Imaginile au fost preluate de pe: https://unsplash.com/ ***
-
 - Documentația Next.js: https://nextjs.org/docs
 - Documentația React: https://reactjs.org/docs
 - Documentația CSS: https://developer.mozilla.org/en-US/docs/Web/CSS/Reference
+
+---
+
+*** Imaginile au fost preluate de pe: https://unsplash.com/ ***
 
 ---
 

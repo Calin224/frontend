@@ -26,7 +26,7 @@ Aici sunt câteva resurse utile pentru dezvoltarea proiectului AquaCart:
 
 ---
 
-*** Imaginile au fost preluate de pe: https://unsplash.com/ ***
+Imaginile au fost preluate de pe: https://unsplash.com/
 
 ---
 

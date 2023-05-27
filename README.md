@@ -1,4 +1,5 @@
 **AquaCart**
+
 ***Descriere***
 Bine ați venit la AquaCart, locul unde putem face o schimbare în modul în care consumăm apa și în același timp protejăm mediul înconjurător. AquaCart este un site de comerț electronic specializat în vânzarea apei îmbuteliate în cutii eco-friendly. Ne concentrăm pe oferirea unei alternative sustenabile la sticlele de plastic tradiționale, contribuind astfel la reducerea poluării și protejarea resurselor naturale.
 
